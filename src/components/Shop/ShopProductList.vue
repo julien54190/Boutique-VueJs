@@ -1,21 +1,16 @@
 <script setup lang="ts">
-    import ShopProduct from './ShopProduct.vue';
+    import type { ProductInterface } from '@/interfaces/productinterface';
+import ShopProduct from './ShopProduct.vue';
+
+
+    defineProps<{
+        products: ProductInterface[]
+    }>()
 </script>
 
 <template>
     <div class="grid p-20">
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
-        <ShopProduct/>
+        <ShopProduct v-for="product of products" :key="product.id" :product="product"/>
     </div>
 </template>
 
@@ -23,8 +18,8 @@
     .grid {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr ;
-        grid-auto-rows: 350px ; 
-        gap: 20px;     
+        grid-auto-rows: 500px ;
+        gap: 20px;
     }
 
 </style>

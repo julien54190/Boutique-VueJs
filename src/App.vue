@@ -1,14 +1,20 @@
 <script setup lang="ts">
-  import TheHeader from './components/header.vue';
-  import TheFooter from './components/footer.vue';
-  import Shop from './components/Shop/Shop.vue';
-  import Cart from './components/Cart/Cart.vue';
+  import TheHeader from './components/Header.vue';
+  import TheFooter from './components/Footer.vue';
+  import Shop from './components/Shop/ShopView.vue';
+  import Cart from './components/Cart/CartView.vue';
+  import data from './data/product.ts';
+import { reactive } from 'vue';
+import type { ProductInterface } from './interfaces/productinterface.ts';
+
+
+const products = reactive<ProductInterface[]>(data)
 </script>
 
 <template>
   <div class="app-container">
     <TheHeader class="header"/>
-    <Shop class="shop"/>
+    <Shop :products="products" class="shop"/>
     <Cart class="cart"/>
     <TheFooter class="footer"/>
   </div>
@@ -23,7 +29,7 @@
 .app-container {
   min-height: 100vh;
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     "header header"
     "shop cart"
     "footer footer ";

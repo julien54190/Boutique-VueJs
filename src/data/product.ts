@@ -5,6 +5,7 @@ export default [
         image: "src/assets/img/Iphone.jpeg",
         prix: 999,
         description: "The latest iPhone with advanced features and performance.",
+        quantité: 0,
     },
     {
         id: 2,
@@ -12,6 +13,7 @@ export default [
         image: "src/assets/img/galaxy.jpeg",
         prix: 1199,
         description: "Samsung's flagship phone with a stunning display and camera.",
+        quantité: 0,
     },
     {
         id: 3,
@@ -19,6 +21,7 @@ export default [
         image: "src/assets/img/googlePixel.jpeg",
         prix: 899,
         description: "Experience the best of Google with the Pixel 7 Pro.",
+        quantité: 0,
     },
     {
         id: 4,
@@ -26,6 +29,7 @@ export default [
         image: "src/assets/img/onepluspro.jpeg",
         prix: 749,
         description: "A powerful smartphone with fast performance and sleek design.",
+        quantité: 0,
     },
     {
         id: 5,
@@ -33,6 +37,7 @@ export default [
         image: "src/assets/img/xiaomi.jpeg",
         prix: 899,
         description: "Xiaomi's latest flagship with top-notch specs and features.",
+        quantité: 0,
     },
     {
         id: 6,
@@ -40,6 +45,7 @@ export default [
         image: "src/assets/img/sony.jpeg",
         prix: 1099,
         description: "A premium smartphone with a focus on photography and media.",
+        quantité: 0,
     },
     {
         id: 7,
@@ -47,6 +53,7 @@ export default [
         image: "src/assets/img/oppo.jpeg",
         prix: 999,
         description: "Oppo's flagship with innovative design and powerful performance.",
+        quantité: 0,
     },
     {
         id: 8,
@@ -54,6 +61,7 @@ export default [
         image: "src/assets/img/huawei.jpeg",
         prix: 899,
         description: "Huawei's latest offering with exceptional camera capabilities.",
+        quantité: 0,
     },
     {
         id: 9,
@@ -61,5 +69,6 @@ export default [
         image: "src/assets/img/macBookPro.jpeg",
         prix: 2499,
         description: "The ultimate MacBook for professionals with powerful hardware.",
+        quantité: 0,
     }
 ]

@@ -6,11 +6,18 @@ import ShopProduct from './ShopProduct.vue';
     defineProps<{
         products: ProductInterface[]
     }>()
+
+    const emit = defineEmits<{
+      (e: 'addProductToCard', productId: number): void
+    }>();
 </script>
 
 <template>
     <div class="grid p-20">
-        <ShopProduct v-for="product of products" :key="product.id" :product="product"/>
+        <ShopProduct
+            v-for="product of products" :key="product.id" :product="product"
+            @add-product-to-card="emit('addProductToCard', $event)"
+            />
     </div>
 </template>
 

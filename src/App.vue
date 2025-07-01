@@ -8,14 +8,33 @@ import { reactive } from 'vue';
 import type { ProductInterface } from './interfaces/productinterface.ts';
 
 
-const products = reactive<ProductInterface[]>(data)
+
+const state = reactive<{
+  products: ProductInterface[],
+  cart: ProductInterface[]
+}>({
+  products: data,
+  cart: []
+});
+
+function addProductToCart(productId: number): void {
+  const product = state.products.find(product => product.id === productId);
+  if (product && !state.cart.some(product => product.id === productId)) {
+    state.cart.push({...product});
+  }
+}
+
+function removeProductFromCart(productId: number): void {
+  state.cart = state.cart.filter(product => product.id !== productId);
+
+}
 </script>
 
 <template>
   <div class="app-container">
     <TheHeader class="header"/>
-    <Shop :products="products" class="shop"/>
-    <Cart class="cart"/>
+    <Shop :products="state.products" @add-product-to-card="addProductToCart" class="shop"/>
+    <Cart :cart="state.cart" @remove-product-from-cart="removeProductFromCart" class="cart"/>
     <TheFooter class="footer"/>
   </div>
 

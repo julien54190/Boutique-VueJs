@@ -12,6 +12,10 @@
         <ShopProduct/>
         <ShopProduct/>
         <ShopProduct/>
+        <ShopProduct/>
+        <ShopProduct/>
+        <ShopProduct/>
+        <ShopProduct/>
     </div>
 </template>
 
@@ -19,7 +23,7 @@
     .grid {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr ;
-        grid-auto-rows: 300px ; 
+        grid-auto-rows: 350px ; 
         gap: 20px;     
     }
 

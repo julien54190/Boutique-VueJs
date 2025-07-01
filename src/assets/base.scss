@@ -13,6 +13,8 @@
 
   --border: 1px solid var(--gray-2);
   --border-radius: 4px;
+  --border-radius-bg: 10px;
+  --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   --font-family: 'Roboto', sans-serif;
 }
@@ -125,4 +127,39 @@ body {
 
 .mb-20 {
   margin-bottom: 20px;
+}
+
+// button 
+
+.btn {
+  padding: 8px 15px;
+  border: 0;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ;
+}
+
+.btn-primary {
+  background-color: var(--primary-1);
+  color: var(--text-primary-color);
+  &:hover {
+    background-color: var(--primary-2);
+  }
+}
+
+.btn-danger {
+  background-color: var(--danger-1);
+  color: var(--text-primary-color);
+  &:hover {
+    background-color: var(--danger-2);
+  }
+}
+
+.btn-success {
+  background-color: var(--success-1);
+  color: var(--text-primary-color);
+  &:hover {
+    background-color: var(--success-2);
+  }
 }

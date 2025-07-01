@@ -8,8 +8,8 @@
 <template>
   <div class="app-container">
     <TheHeader class="header"/>
-    <!-- <Shop class="shop b2"/>
-    <Cart class="cart b3"/> -->
+    <Shop class="shop"/>
+    <Cart class="cart"/>
     <TheFooter class="footer"/>
   </div>
 
@@ -41,6 +41,7 @@
 
 .cart {
   grid-area: cart;
+  background-color: #fff;
 }
 
 .footer {

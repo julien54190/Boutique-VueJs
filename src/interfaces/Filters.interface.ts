@@ -1,4 +1,4 @@
-export type Category = 'télephones' | 'tablets' | 'laptops' | 'accessories' | 'all';
+export type Category = 'telephones' | 'tablets' | 'laptops' | 'accessories' | 'all';
 
 export interface FiltersInterface {
   search: string;

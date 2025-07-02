@@ -43,6 +43,7 @@ img {
 a {
   color: var(--text-color);
   text-decoration: none;
+  cursor: pointer;
 }
 
 body {
@@ -127,6 +128,10 @@ input{
   margin-right: 20px;
 }
 
+.mb-5 {
+  margin-bottom: 5px;
+}
+
 .mb-10 {
   margin-bottom: 10px;
 }
@@ -168,4 +173,29 @@ input{
   &:hover {
     background-color: var(--success-2);
   }
+}
+
+.card {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color:white;
+  padding: 30px;
+}
+
+input, textarea, select {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 8px 15px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-3);
+}
+
+.form-error {
+  color: var(--danger-1);
+  font-size: 14px;
+  font-weight: 500;
 }

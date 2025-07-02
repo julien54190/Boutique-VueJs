@@ -14,7 +14,7 @@ const emit = defineEmits<{
   <div class="mb-10 p-10 d-flex flex-row align-items-center product">
     <Strong class="mr-10">{{ product.title }}</Strong>
     <span class="flex-fill mr-10">x {{ product.quantity }}</span>
-    <span class="mr-10">Prix : {{ product.prix }}€</span>
+    <span class="mr-10">price : {{ product.price }}€</span>
     <button class="btn btn-danger" @click="emit('removeProductFromCart', product.id)">
       Supprimer
     </button>

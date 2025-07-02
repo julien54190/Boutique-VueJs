@@ -6,6 +6,7 @@ import ShopFilters from './ShopFilters.vue'
 defineProps<{
   products: ProductInterface[]
   filters: FiltersInterface
+  nbrOfProducts: number
 }>()
 
 const emit = defineEmits<{
@@ -18,6 +19,7 @@ const emit = defineEmits<{
   <div class="d-flex flex-row">
     <ShopFilters
       :filters="filters"
+      :nbrOfProducts="nbrOfProducts"
       @updateFilters="emit('updateFilters', $event)"
       class="shop-filter"
     />

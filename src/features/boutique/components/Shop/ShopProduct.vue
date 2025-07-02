@@ -21,7 +21,7 @@ const emit = defineEmits<{
         </div>
 
         <div class="d-flex flex-row align-items-center">
-            <span class="flex-fill">prix : {{ product.prix }}€</span>
+            <span class="flex-fill">price : {{ product.price }}€</span>
             <button class="btn btn-primary" @click="emit('addProductToCard', product.id)">Ajouter au panier</button>
         </div>
     </div>

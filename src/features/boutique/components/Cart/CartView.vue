@@ -8,7 +8,7 @@ const props = defineProps<{
 }>()
 
 const totalPrice = computed(() => props.cart.reduce((total, product) => {
-  return total + (product.prix * product.quantity);
+  return total + (product.price * product.quantity);
 }, 0));
 
 

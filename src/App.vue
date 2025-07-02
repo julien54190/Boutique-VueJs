@@ -1,142 +1,57 @@
 <script setup lang="ts">
-import TheHeader from './components/Header.vue'
-import TheFooter from './components/Footer.vue'
-import Shop from './components/Shop/ShopView.vue'
-import Cart from './components/Cart/CartView.vue'
-import data from './data/product.ts'
-import { computed, reactive } from 'vue'
-import type {
-  FiltersInterface,
-  FilterUpdate,
-  ProductCartInterface,
-  ProductInterface,
-} from './interfaces'
-import { DEFAULT_FILTERS } from './data/filters.ts'
+import TheHeader from './components/Header.vue';
+import TheFooter from './components/Footer.vue';
+import Boutique from './features/boutique/Boutique.vue';
+import Admin from './features/admin/admin.vue';
+import { reactive, type Component as C } from 'vue';
+import type { Page } from './interfaces';
+import { seed } from './data/seed';
 
 const state = reactive<{
-  products: ProductInterface[]
-  cart: ProductCartInterface[]
-  filters: FiltersInterface
+    page: Page
 }>({
-  products: data,
-  cart: [],
-  filters: { ...DEFAULT_FILTERS },
+    page: 'Boutique'
 })
 
-function addProductToCard(productId: number): void {
-  const product = state.products.find((product) => product.id === productId)
-  if (product) {
-    const productInCart = state.cart.find((item) => item.id === productId)
-    if (productInCart) {
-      productInCart.quantity++
-    } else {
-      state.cart.push({ ...product, quantity: 1 })
-    }
-  }
+const pages: { [s: string]: C } = {
+    Boutique,
+    Admin
 }
 
-function removeProductFromCart(productId: number): void {
-  const productIndex = state.cart.findIndex((item) => item.id === productId)
-  if (productIndex !== -1) {
-    const productInCart = state.cart[productIndex]
-    if (productInCart.quantity > 1) {
-      productInCart.quantity--
-    } else {
-      state.cart.splice(productIndex, 1)
-    }
-  }
+function navigate(page: Page): void {
+    state.page = page;
 }
 
-function updateFlter(filterUpdate: FilterUpdate) {
-  if (filterUpdate.search !== undefined) {
-    state.filters.search = filterUpdate.search
-  } else if (filterUpdate.priceRange) {
-    state.filters.priceRange = filterUpdate.priceRange
-  } else if (filterUpdate.category) {
-    state.filters.category = filterUpdate.category
-  } else {
-    state.filters = { ...DEFAULT_FILTERS }
-  }
-}
-
-const cartEmpty = computed(() => state.cart.length === 0)
-
-const filteredProducts = computed(() => {
-  return state.products.filter((product) => {
-    if (
-      (product.title.toLowerCase().startsWith(state.filters.search.toLowerCase()) &&
-        product.prix >= state.filters.priceRange[0] &&
-        product.prix <= state.filters.priceRange[1] &&
-        product.category === state.filters.category) ||
-      state.filters.category === 'all'
-    ) {
-      return true
-    } else {
-      return false
-    }
-  })
-})
+//seed('projetproducts');
 </script>
 
 <template>
-  <div
-    class="app-container"
-    :class="{
-      gridEmpty: cartEmpty,
-    }"
-  >
-    <TheHeader class="header" />
-    <Shop
-      @update-filter="updateFlter"
-      :products="filteredProducts"
-      :filters="state.filters"
-      @add-product-to-card="addProductToCard"
-      class="shop"
-    />
-    <Cart
-      v-if="!cartEmpty"
-      :cart="state.cart"
-      @remove-product-from-cart="removeProductFromCart"
-      class="cart"
-    />
+  <div class="app-container">
+    <TheHeader @navigate="navigate" :page="state.page" class="header" />
+    <div class="app-content">
+      <Component :is="pages[state.page]" />
+    </div>
     <TheFooter class="footer" />
   </div>
 </template>
 
 <style lang="scss">
-@use './assets/base.scss' as *;
-@use './assets/debug.scss' as *;
+@use './assets/scss/base.scss' as *;
+@use './assets/scss/debug.scss' as *;
 
 .app-container {
   min-height: 100vh;
   display: grid;
-  grid-template-areas:
-    'header header'
-    'shop cart'
-    'footer footer ';
-  grid-template-columns: 75% 25%;
+  grid-template-areas: 'header' 'app-content' 'footer';
   grid-template-rows: 48px auto 48px;
-}
-
-.gridEmpty {
-  grid-template-areas:
-    'header'
-    'shop'
-    'footer ';
-  grid-template-columns: 100%;
 }
 
 .header {
   grid-area: header;
 }
 
-.shop {
-  grid-area: shop;
-}
-
-.cart {
-  grid-area: cart;
-  background-color: #fff;
+.app-content {
+  grid-area: app-content;
 }
 
 .footer {

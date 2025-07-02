@@ -54,6 +54,12 @@ body {
   background-color: var(--gray-1);
 }
 
+input{
+  border: var(--border);
+  border-radius: var(--border-radius);
+  padding: 8px 15px;
+}
+
 // flex
 
 .d-flex {
@@ -129,7 +135,7 @@ body {
   margin-bottom: 20px;
 }
 
-// button 
+// button
 
 .btn {
   padding: 8px 15px;

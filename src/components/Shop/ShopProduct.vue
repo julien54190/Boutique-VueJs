@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ProductInterface } from '@/interfaces/productinterface';
+import type { ProductInterface } from '@/interfaces/';
 
 
 

@@ -1,7 +1,15 @@
 <script setup lang="ts">
 import Shop from './components/Shop/Shop.vue';
 import Cart from './components/Cart/Cart.vue';
-import { computed, reactive, watchEffect, watch, provide, toRef } from 'vue';
+import {
+  computed,
+  reactive,
+  watchEffect,
+  watch,
+  provide,
+  toRef,
+  toRefs,
+} from 'vue';
 import type {
   FiltersInterface,
   ProductCartInterface,
@@ -30,7 +38,7 @@ const state = reactive<{
 
 provide(pageKey, toRef(state, 'page'));
 
-watch(state.filters, () => {
+watch([() => state.filters.priceRange, () => state.filters.category], () => {
   state.page = 1;
   state.products = [];
 });
@@ -105,7 +113,7 @@ const filteredProducts = computed(() => {
 </script>
 
 <template>
-  <div class="boutique-container" :class="{ 'grid-empty': cartEmpty }">
+  <div class="d-flex flex-column">
     <Shop
       @update-filter="updateFilter"
       @add-product-to-cart="addProductToCart"
@@ -124,16 +132,4 @@ const filteredProducts = computed(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
-.boutique-container {
-  display: grid;
-  grid-template-columns: 75% 25%;
-}
-.grid-empty {
-  grid-template-columns: 100%;
-}
-.cart {
-  background-color: white;
-  border-left: var(--border);
-}
-</style>
+<style scoped lang="scss"></style>

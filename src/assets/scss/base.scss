@@ -1,3 +1,4 @@
+@use './mixins';
 :root {
   --primary-1: #3498db;
   --primary-2: #2980b9;
@@ -198,4 +199,12 @@ label {
   color: var(--danger-1);
   font-size: 14px;
   font-weight: 500;
+}
+
+// util
+
+.hide-xs {
+  @include mixins.xs {
+    display: none;
+  }
 }

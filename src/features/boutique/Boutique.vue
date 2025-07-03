@@ -1,47 +1,77 @@
 <script setup lang="ts">
-import Shop from './components/Shop/ShopView.vue'
-import Cart from './components/Cart/CartView.vue'
-import data from '../../data/product.ts'
-import { computed, reactive } from 'vue'
+import Shop from './components/Shop/Shop.vue';
+import Cart from './components/Cart/Cart.vue';
+import { computed, reactive, watchEffect, watch, provide, toRef } from 'vue';
 import type {
   FiltersInterface,
-  FilterUpdate,
   ProductCartInterface,
   ProductInterface,
-} from '../../interfaces'
-import { DEFAULT_FILTERS } from '../../data/filters.ts'
+  FilterUpdate,
+} from '../../interfaces';
+import { DEFAULT_FILTERS } from './data/filters';
+import { fetchProducts } from '../../shared/services/product.service';
+import { pageKey } from '../../shared/injectionKeys/pageKey';
 
 const state = reactive<{
-  products: ProductInterface[]
-  cart: ProductCartInterface[]
-  filters: FiltersInterface
+  products: ProductInterface[];
+  cart: ProductCartInterface[];
+  filters: FiltersInterface;
+  page: number;
+  isLoading: boolean;
+  moreResults: boolean;
 }>({
-  products: data,
+  products: [],
   cart: [],
   filters: { ...DEFAULT_FILTERS },
-})
+  page: 1,
+  isLoading: true,
+  moreResults: true,
+});
 
-function addProductToCard(productId: number): void {
-  const product = state.products.find((product) => product.id === productId)
+provide(pageKey, toRef(state, 'page'));
+
+watch(state.filters, () => {
+  state.page = 1;
+  state.products = [];
+});
+
+watchEffect(async () => {
+  state.isLoading = true;
+  const products = await fetchProducts(state.filters, state.page);
+  if (Array.isArray(products)) {
+    state.products = [...state.products, ...products];
+    if (products.length < 20) {
+      state.moreResults = false;
+    }
+  } else {
+    state.products = [...state.products, products];
+  }
+  state.isLoading = false;
+});
+
+function addProductToCart(productId: string): void {
+  const product = state.products.find((product) => product._id === productId);
   if (product) {
-    const productInCart = state.cart.find((item) => item.id === productId)
+    const productInCart = state.cart.find(
+      (product) => product._id === productId
+    );
     if (productInCart) {
-      productInCart.quantity++
+      productInCart.quantity++;
     } else {
-      state.cart.push({ ...product, quantity: 1 })
+      state.cart.push({ ...product, quantity: 1 });
     }
   }
 }
 
-function removeProductFromCart(productId: number): void {
-  const productIndex = state.cart.findIndex((item) => item.id === productId)
-  if (productIndex !== -1) {
-    const productInCart = state.cart[productIndex]
-    if (productInCart.quantity > 1) {
-      productInCart.quantity--
-    } else {
-      state.cart.splice(productIndex, 1)
-    }
+function removeProductFromCart(productId: string): void {
+  const productFromCart = state.cart.find(
+    (product) => product._id === productId
+  );
+  if (!productFromCart) return;
+  if (productFromCart?.quantity === 1) {
+    state.cart = state.cart.filter((product) => product._id !== productId);
+  } else {
+    productFromCart.quantity--;
   }
 }
 
@@ -57,65 +87,53 @@ function updateFilter(filterUpdate: FilterUpdate) {
   }
 }
 
-const cartEmpty = computed(() => state.cart.length === 0)
+const cartEmpty = computed(() => state.cart.length === 0);
 
 const filteredProducts = computed(() => {
   return state.products.filter((product) => {
     if (
       product.title
         .toLocaleLowerCase()
-        .startsWith(state.filters.search.toLocaleLowerCase()) &&
-      product.price >= state.filters.priceRange[0] &&
-      product.price <= state.filters.priceRange[1] &&
-      (product.category === state.filters.category ||
-        state.filters.category === 'all')
+        .startsWith(state.filters.search.toLocaleLowerCase())
     ) {
       return true;
     } else {
       return false;
     }
-  })
-})
-
-const nbrOfProducts = computed(() => filteredProducts.value.length);
-
-
-
-
+  });
+});
 </script>
 
 <template>
-  <div class="boutique-container" :class="{ 'grid-empty': cartEmpty}">
+  <div class="boutique-container" :class="{ 'grid-empty': cartEmpty }">
     <Shop
       @update-filter="updateFilter"
+      @add-product-to-cart="addProductToCart"
+      @inc-page="state.page++"
       :products="filteredProducts"
       :filters="state.filters"
-      :nbrOfProducts="nbrOfProducts"
-      @add-product-to-card="addProductToCard"
+      :more-results="state.moreResults"
       class="shop"
     />
     <Cart
       v-if="!cartEmpty"
       :cart="state.cart"
-      @remove-product-from-cart="removeProductFromCart"
       class="cart"
+      @remove-product-from-cart="removeProductFromCart"
     />
   </div>
-
 </template>
 
-<style lang="scss" scoped>
-  .boutique-container{
-    display: grid;
-    grid-template-columns: 75% 25%;
-  }
-
-  .grid-empty {
-    grid-template-columns: 100%;
-  }
-
-  .cart {
-    background-color: white;
-    border-left: var(--border);
-  }
+<style scoped lang="scss">
+.boutique-container {
+  display: grid;
+  grid-template-columns: 75% 25%;
+}
+.grid-empty {
+  grid-template-columns: 100%;
+}
+.cart {
+  background-color: white;
+  border-left: var(--border);
+}
 </style>

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useForm, useField } from 'vee-validate';
 import { z } from 'zod';
-import { toTypedSchema } from '@vee-validate/zod';
+import { toFormValidator } from '@vee-validate/zod';
 import { onMounted, ref } from 'vue';
 
 const firstInput = ref<HTMLInputElement | null>(null);
@@ -10,7 +10,7 @@ onMounted(() => {
 });
 
 const required = { required_error: 'Veuillez renseigner ce champ' };
-const validationSchema = toTypedSchema(
+const validationSchema = toFormValidator(
   z.object({
     title: z
       .string(required)
@@ -24,7 +24,7 @@ const validationSchema = toTypedSchema(
     description: z
       .string(required)
       .min(10, { message: 'La description doit faire au moins 10 caractères' }),
-    category: z.enum(['gamer', 'desktop', 'streaming', 'all']),
+    category: z.string(required),
   })
 );
 

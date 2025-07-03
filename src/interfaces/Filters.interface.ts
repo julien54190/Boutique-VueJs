@@ -1,4 +1,4 @@
-export type Category = 'telephones' | 'tablets' | 'laptops' | 'accessories' | 'all';
+import type { Category } from './type';
 
 export interface FiltersInterface {
   search: string;

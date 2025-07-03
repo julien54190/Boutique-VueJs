@@ -1,75 +1,76 @@
-import type { ProductInterface } from "@/interfaces";
+import type { ProductInterface } from '../interfaces';
 
 export default [
-    {
-        id: 1,
-        title: "Apple iPhone 14 Pro",
-        image: "src/assets/img/Iphone.jpeg",
-        price: 999,
-        description: "The latest iPhone with advanced features and performance.",
-        category: "telephones"
-
-    },
-    {
-        id: 2,
-        title: "Samsung Galaxy S23 Ultra",
-        image: "src/assets/img/galaxy.jpeg",
-        price: 1199,
-        description: "Samsung's flagship phone with a stunning display and camera.",
-        category: "telephones"
-
-    },
-    {
-        id: 3,
-        title: "Google Pixel 7 Pro",
-        image: "src/assets/img/googlePixel.jpeg",
-        price: 899,
-        description: "Experience the best of Google with the Pixel 7 Pro.",
-        category: "telephones"
-
-    },
-    {
-        id: 4,
-        title: "OnePlus 11",
-        image: "src/assets/img/onepluspro.jpeg",
-        price: 749,
-        description: "A powerful smartphone with fast performance and sleek design.",
-        category: "telephones",
-
-    },
-    {
-        id: 5,
-        title: "Xiaomi 13 Pro",
-        image: "src/assets/img/xiaomi.jpeg",
-        price: 899,
-        description: "Xiaomi's latest flagship with top-notch specs and features.",
-        category: "telephones"
-
-    },
-    {
-        id: 6,
-        title: "Sony Xperia 1 IV",
-        image: "src/assets/img/sony.jpeg",
-        price: 1099,
-        description: "A premium smartphone with a focus on photography and media.",
-        category: "telephones"
-    },
-    {
-        id: 7,
-        title: "Oppo Find X5 Pro",
-        image: "src/assets/img/oppo.jpeg",
-        price: 999,
-        description: "Oppo's flagship with innovative design and powerful performance.",
-        category: "telephones"
-
-    },
-    {
-        id: 8,
-        title: "Macbook Pro 16-inch",
-        image: "src/assets/img/macBookPro.jpeg",
-        price: 2499,
-        description: "The ultimate MacBook for professionals with powerful hardware.",
-        category: "laptops"
-
-    }
+  {
+    image:
+      'https://stackblitz.com/files/vitejs-vite-auyhqv/github/dymafr/vue-c8l8/master/src/assets/images/macbookpro.PNG',
+    title: 'Macbook Pro',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing edolor tempore ipsam cum ipsum reiciendis',
+    price: 1500,
+    category: 'desktop',
+  },
+  {
+    image:
+      'https://stackblitz.com/files/vitejs-vite-auyhqv/github/dymafr/vue-c8l8/master/src/assets/images/levono.PNG',
+    title: 'Levono Pro',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing edolor tempore ipsam cum ipsum reiciendis',
+    price: 2300,
+    category: 'desktop',
+  },
+  {
+    image:
+      'https://stackblitz.com/files/vitejs-vite-auyhqv/github/dymafr/vue-c8l8/master/src/assets/images/rider.PNG',
+    title: 'Rider',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing edolor tempore ipsam cum ipsum reiciendis',
+    price: 1200,
+    category: 'desktop',
+  },
+  {
+    image:
+      'https://stackblitz.com/files/vitejs-vite-auyhqv/github/dymafr/vue-c8l8/master/src/assets/images/ldlc.PNG',
+    title: 'LDLC benolo',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing edolor tempore ipsam cum ipsum reiciendis',
+    price: 4500,
+    category: 'gamer',
+  },
+  {
+    image:
+      'https://stackblitz.com/files/vitejs-vite-auyhqv/github/dymafr/vue-c8l8/master/src/assets/images/asus.PNG',
+    title: 'Asus gamer',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing edolor tempore ipsam cum ipsum reiciendis',
+    price: 3755,
+    category: 'streaming',
+  },
+  {
+    image:
+      'https://stackblitz.com/files/vitejs-vite-auyhqv/github/dymafr/vue-c8l8/master/src/assets/images/rog.PNG',
+    title: 'Rog desktop',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing edolor tempore ipsam cum ipsum reiciendis',
+    price: 2452,
+    category: 'streaming',
+  },
+  {
+    image:
+      'https://stackblitz.com/files/vitejs-vite-auyhqv/github/dymafr/vue-c8l8/master/src/assets/images/msi.PNG',
+    title: 'MSI play',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing edolor tempore ipsam cum ipsum reiciendis',
+    price: 1478,
+    category: 'gaming',
+  },
+  {
+    image:
+      'https://stackblitz.com/files/vitejs-vite-auyhqv/github/dymafr/vue-c8l8/master/src/assets/images/pad.PNG',
+    title: 'Think pad',
+    description:
+      'Lorem ipsum dolor sit amet consectetur adipisicing edolor tempore ipsam cum ipsum reiciendis',
+    price: 899,
+    category: 'desktop',
+  },
 ] as ProductInterface[];
